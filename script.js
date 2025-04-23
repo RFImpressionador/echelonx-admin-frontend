@@ -1,16 +1,14 @@
-// Função chamada quando clica no botão "Entrar"
 function entrar() {
-  const username = document.getElementById("username").value.trim(); // Pega usuário
-  const password = document.getElementById("password").value.trim(); // Pega senha
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   if (!username || !password) {
-    // Checa se preencheu tudo
     alert("Por favor, preencha todos os campos.");
     return;
   }
 
-  // Envia os dados para o backend hospedado
   fetch("https://echelonx-backend.onrender.com/api/login", {
+    // Verifique o link
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -18,7 +16,6 @@ function entrar() {
     .then((response) => response.json())
     .then((data) => {
       if (data.message) {
-        // Login OK, redireciona pro painel
         window.location.href = "https://echelonx-painel.onrender.com/admin";
       } else {
         alert("Credenciais inválidas.");
